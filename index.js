@@ -24,6 +24,7 @@ passport.use(
       let user;
       try {
         user = await UserModel.findOne({ email });
+        console.log(user);
         if (user) {
           return cb(null, user);
         }
