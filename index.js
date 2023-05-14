@@ -34,7 +34,7 @@ passport.use(
         role:"user",
         pass: uuid(),
         });
-        console.log(UserModel,profile);
+        console.log(UserModel);
         await user.save();
         return cb(null, user);
       } catch (error) {
