@@ -20,8 +20,9 @@ passport.use(
       callbackURL: "https://mywantsgoogleauth.onrender.com/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
-      var  email  = profile._json.email[0];
+      var  email  = profile._json.email;
       let user;
+      console.log(email);
       try {
         user = await UserModel.findOne({ email });
         console.log(user);
@@ -31,7 +32,7 @@ passport.use(
         user = new UserModel({
         name: profile.displayName,
         Username:profile.displayName,
-        email: profile._json.email[0],
+        email: profile._json.email,
         role:"user",
         pass: uuid(),
         });
