@@ -29,8 +29,8 @@ passport.use(
         }
         user = new UserModel({
         name: profile.displayName,
-        Username:profile.Username,
-        email: profile._json.email,
+        Username:profile.displayName,
+        email: profile._json.email[0],
         role:"user",
         pass: uuid(),
         });
