@@ -17,7 +17,7 @@ passport.use(
     {
       clientID: process.env.google_clientID,
       clientSecret: process.env.google_clientSecret,
-      callbackURL: "http://localhost:4500/auth/google/callback",
+      callbackURL: "https://mywantsgoogleauth.onrender.com/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       var { email } = profile._json;
@@ -28,12 +28,13 @@ passport.use(
           return cb(null, user);
         }
         user = new UserModel({
-          first_name: profile.displayName,
-          last_name: profile.name.familyName || profile.displayName,
-          mobile: profile._json.email,
-          email: profile._json.email,
-          password: uuid(),
+        name: profile.displayName,
+        Username:profile.Username,
+        email: profile._json.email,
+        role:"user",
+        pass: uuid(),
         });
+        console.log(UserModel,profile);
         await user.save();
         return cb(null, user);
       } catch (error) {
@@ -60,7 +61,7 @@ app.get(
       expiresIn: "1d",
     });
     res.redirect(
-      `http://127.0.0.1:8000/Frontend/index.html?&email=${user.email}&id=${token}&first_name=${user.first_name}&last_name=${user.last_name}`
+      `http://127.0.0.1:8000/Frontend/index.html?&email=${user.email}&id=${token}&name=${user.name}`
     );
   }
 );
