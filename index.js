@@ -63,7 +63,7 @@ app.get(
       expiresIn: "1d",
     });
     res.redirect(
-      `http://127.0.0.1:8000/Frontend/index.html?&email=${user.email}&id=${token}&name=${user.name}`
+      `https://mywants.netlify.app/?&email=${user.email}&id=${token}&name=${user.name}`
     );
   }
 );
